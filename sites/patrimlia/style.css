@@ -301,10 +301,13 @@ footer .legal{font-size:.78rem;color:#6b645b;max-width:30ch;line-height:1.5}
 
 /* ===== plein écran sur pages gabarit par défaut (route B, sans canvas) ===== */
 body.page-template-default{--wp--style--global--content-size:100%;--wp--style--global--wide-size:100%;background:var(--obs);margin:0}
+body.page-template-default a.skip-link,
 body.page-template-default header.wp-block-template-part,
 body.page-template-default footer.wp-block-template-part,
 body.page-template-default .wp-block-site-title,
-body.page-template-default .wp-block-navigation{display:none!important}
+body.page-template-default .wp-block-navigation,
+body.page-template-default .wp-block-post-title,
+body.page-template-default .entry-header{display:none!important}
 body.page-template-default .wp-site-blocks,
 body.page-template-default main.wp-block-group,
 body.page-template-default .entry-content,
