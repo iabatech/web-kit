@@ -1,0 +1,169 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Patrimlia sections</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap">
+<style>
+:root{--paper:#f4f1ea;--mut:#b9b2a6;--line:rgba(244,241,234,.16);--gold:#caa568;--gold-d:#a9823f;--green:#1f9460;--green-d:#15794a;--rust:#c86a46;--obs:#0b0a09;--arch:"Archivo",system-ui,sans-serif;--fr:"Fraunces",Georgia,serif}
+*{box-sizing:border-box;margin:0}
+body{font-family:var(--arch);background:var(--obs);color:var(--paper);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{width:100%;max-width:1320px;margin:0 auto;padding-inline:48px}
+.eyebrow{font-size:.76rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-d)}
+.thin{font-family:var(--fr);font-weight:400;font-style:italic;letter-spacing:-.01em}
+.band{padding-block:120px;position:relative;overflow:hidden}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}
+
+h2.big{font-weight:900;letter-spacing:-.035em;line-height:.98;font-size:clamp(2.2rem,4.6vw,3.8rem)}
+.lead{margin-top:20px;font-size:1.12rem;line-height:1.6;color:var(--mut);max-width:46ch}
+
+/* ===== TRIANGLE ===== */
+.triwrap{background:radial-gradient(60% 80% at 82% 12%,rgba(31,148,96,.16),transparent 60%),#0a1310}
+.tgrid{display:grid;grid-template-columns:.92fr 1.08fr;gap:64px;align-items:center}
+.tpanel .step{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-top:1px solid var(--line);cursor:pointer;opacity:.5;transition:opacity .3s}
+.tpanel .step:first-of-type{border-top:none}
+.tpanel .step.on{opacity:1}
+.tpanel .step .num{font-family:var(--fr);font-style:italic;font-size:1rem;color:var(--gold);flex:none;width:26px}
+.tpanel .step b{font-weight:700;font-size:1.05rem;display:block}
+.tpanel .step p{font-size:.92rem;color:var(--mut);margin-top:5px;line-height:1.5}
+
+.triangle{position:relative;width:100%;max-width:560px;margin:0 auto;aspect-ratio:1/1}
+.triangle svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.edge{fill:none;stroke:rgba(202,165,104,.4);stroke-width:1.5;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.3s ease .2s}
+.triangle.in .edge{stroke-dashoffset:0}
+.spoke{fill:none;stroke:rgba(31,148,96,.45);stroke-width:1.2;stroke-dasharray:3 4;opacity:0;transition:opacity .8s ease .9s}
+.triangle.in .spoke{opacity:1}
+.node{position:absolute;transform:translate(-50%,-50%);background:none;border:none;cursor:pointer;z-index:2}
+.node .dot{width:60px;height:60px;border-radius:50%;background:#0d1a15;border:1px solid var(--line);display:grid;place-items:center;transition:.25s;margin:0 auto}
+.node .dot svg{width:25px;height:25px;color:var(--gold);stroke-width:1.8}
+.node .lb{position:absolute;left:50%;top:70px;transform:translateX(-50%);width:180px;font-size:.82rem;font-weight:700;text-align:center;line-height:1.25}
+.node .sb{position:absolute;left:50%;top:108px;transform:translateX(-50%);width:180px;text-align:center;font-size:.72rem;color:var(--mut)}
+.node.on .dot,.node:hover .dot{border-color:var(--gold);background:#17130b;box-shadow:0 0 0 6px rgba(202,165,104,.12)}
+.core{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(31,148,96,.22),rgba(31,148,96,.05));border:1px solid rgba(31,148,96,.45);display:grid;place-items:center;text-align:center;opacity:0;scale:.8;transition:opacity .7s ease .7s,scale .7s cubic-bezier(.2,1.4,.4,1) .7s;z-index:1}
+.triangle.in .core{opacity:1;scale:1}
+.core .cv{font-weight:800;font-size:1.05rem;letter-spacing:-.02em}
+.core .cl{font-size:.68rem;color:var(--green);letter-spacing:.04em;margin-top:3px;text-transform:uppercase;font-weight:700}
+
+/* ===== DUEL COMPARATIF ===== */
+.duel{background:#0d0b09}
+.duelhead{text-align:center;max-width:52ch;margin:0 auto 20px}
+.toggle{display:flex;justify-content:center;gap:0;margin:0 auto 54px;width:max-content;background:rgba(244,241,234,.05);border:1px solid var(--line);border-radius:999px;padding:5px}
+.toggle button{font-family:var(--arch);font-size:.95rem;font-weight:700;color:var(--mut);background:none;border:none;padding:12px 30px;border-radius:999px;cursor:pointer;transition:.25s}
+.toggle button.on[data-t="fr"]{background:var(--rust);color:#1a0d08}
+.toggle button.on[data-t="lx"]{background:var(--green);color:#04120b}
+.scene{max-width:900px;margin:0 auto;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:rgba(244,241,234,.02)}
+.scene .top{padding:40px 44px 30px}
+.scene .cap-l{font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.scene .cap-v{font-weight:900;font-size:clamp(2.4rem,5vw,3.6rem);letter-spacing:-.03em;font-variant-numeric:tabular-nums;margin-top:6px}
+.meter{margin-top:26px;height:20px;border-radius:999px;background:rgba(244,241,234,.07);position:relative;overflow:hidden}
+.meter .fillbar{position:absolute;left:0;top:0;height:100%;border-radius:999px;width:100%;transition:width 1s cubic-bezier(.3,.9,.3,1),background 1s}
+.meter .mk70{position:absolute;top:-6px;bottom:-6px;left:7%;width:2px;background:var(--paper);opacity:.5}
+.scene .verdict{display:flex;align-items:baseline;gap:12px;margin-top:18px;font-size:1.05rem}
+.scene .verdict .tag{font-weight:800}
+.scene .verdict .sub{color:var(--mut);font-size:.92rem}
+.scene .rows{border-top:1px solid var(--line)}
+.scene .r{display:grid;grid-template-columns:1fr auto;gap:16px;padding:17px 44px;border-bottom:1px solid var(--line);align-items:center}
+.scene .r:last-child{border-bottom:none}
+.scene .r .k{font-size:.95rem;color:var(--mut)}
+.scene .r .v{font-size:.98rem;font-weight:700;display:flex;align-items:center;gap:9px;justify-content:flex-end;text-align:right}
+.scene .r .v svg{width:17px;height:17px;flex:none}
+.v.bad{color:var(--rust)} .v.good{color:#49c187}
+.hintline{text-align:center;margin-top:22px;font-size:.86rem;color:var(--mut)}
+.hintline b{color:var(--gold)}
+
+@media(max-width:900px){.tgrid{grid-template-columns:1fr;gap:40px}.wrap{padding-inline:22px}.scene .top,.scene .r{padding-inline:24px}.node{width:120px}.node .dot{width:48px;height:48px}}
+</style></head>
+<body>
+
+<!-- ===== DISPOSITIF : TRIANGLE DE SECURITE ===== -->
+<section class="band triwrap"><div class="wrap">
+  <div class="tgrid">
+    <div class="tpanel">
+      <span class="eyebrow rv">La révélation</span>
+      <h2 class="big rv d1" style="margin-top:14px">Le triangle <span class="thin">de sécurité.</span></h2>
+      <p class="lead rv d2">Au Luxembourg, votre capital n'est pas une ligne au bilan d'un assureur. Trois acteurs indépendants le verrouillent. Explorez chaque rôle.</p>
+      <div class="tsteps rv d3" style="margin-top:30px">
+        <div class="step on" data-k="0"><span class="num">01</span><div><b>La compagnie d'assurance</b><p>gère votre contrat, mais ne détient jamais vos actifs. Elle ne peut pas les engager pour ses propres dettes.</p></div></div>
+        <div class="step" data-k="1"><span class="num">02</span><div><b>La banque dépositaire</b><p>conserve vos actifs, physiquement séparés de ceux de l'assureur. C'est la ségrégation.</p></div></div>
+        <div class="step" data-k="2"><span class="num">03</span><div><b>Le Commissariat aux Assurances</b><p>contrôle en continu que la séparation est respectée. Un régulateur d'État, en surveillance permanente.</p></div></div>
+      </div>
+    </div>
+
+    <div class="triangle" id="tri">
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path class="edge" pathLength="1" vector-effect="non-scaling-stroke" d="M50 12 L14 76 L86 76 Z"/>
+        <path class="spoke" vector-effect="non-scaling-stroke" d="M50 12 L50 48"/><path class="spoke" vector-effect="non-scaling-stroke" d="M14 76 L50 48"/><path class="spoke" vector-effect="non-scaling-stroke" d="M86 76 L50 48"/>
+      </svg>
+      <div class="core"><div><div class="cv">Votre capital</div><div class="cl">ségrégué · 1er rang</div></div></div>
+      <button class="node on" data-k="2" style="left:50%;top:12%">
+        <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3 4 6v5c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+        <span class="lb">Commissariat aux Assurances</span><span class="sb">le régulateur</span>
+      </button>
+      <button class="node" data-k="0" style="left:14%;top:76%">
+        <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 21h18M5 21V8l7-4 7 4v13M9 21v-6h6v6"/></svg></span>
+        <span class="lb">Compagnie d'assurance</span><span class="sb">gère le contrat</span>
+      </button>
+      <button class="node" data-k="1" style="left:86%;top:76%">
+        <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 10h18M5 10V7l7-4 7 4v3M6 10v8M18 10v8M4 18h16"/></svg></span>
+        <span class="lb">Banque dépositaire</span><span class="sb">conserve, séparé</span>
+      </button>
+    </div>
+  </div>
+</div></section>
+
+<!-- ===== DUEL COMPARATIF ===== -->
+<section class="band duel"><div class="wrap">
+  <div class="duelhead">
+    <span class="eyebrow rv">La décision</span>
+    <h2 class="big rv d1" style="margin-top:14px">Même capital. <span class="thin">Deux issues.</span></h2>
+    <p class="lead rv d2" style="margin-inline:auto;text-align:center">Prenez 1 000 000 € d'épargne. Regardez ce qu'il en reste, protégé, selon le pays du contrat.</p>
+  </div>
+  <div class="toggle rv d2">
+    <button data-t="fr" class="on">En France</button>
+    <button data-t="lx">Au Luxembourg</button>
+  </div>
+
+  <div class="scene rv d3">
+    <div class="top">
+      <div class="cap-l">Capital réellement protégé en cas de défaillance</div>
+      <div class="cap-v" id="dv">70 000 €</div>
+      <div class="meter"><div class="fillbar" id="fb" style="width:7%;background:var(--rust)"></div><div class="mk70"></div></div>
+      <div class="verdict"><span class="tag" id="vtag" style="color:var(--rust)">930 000 € exposés.</span><span class="sub" id="vsub">garantie plafonnée à 70 000 €, et retraits gelables (loi Sapin 2).</span></div>
+    </div>
+    <div class="rows" id="rows"></div>
+  </div>
+  <p class="hintline rv">Basculez sur <b>Au Luxembourg</b> pour voir la différence.</p>
+</div></section>
+
+<script>
+/* reveal au scroll */
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.18});
+document.querySelectorAll('.rv,.triangle').forEach(function(el){io.observe(el);});
+
+/* triangle : sync steps <-> nodes */
+var steps=document.querySelectorAll('.tpanel .step'),nodes=document.querySelectorAll('.node');
+function pick(k){steps.forEach(function(s){s.classList.toggle('on',+s.dataset.k===k);});nodes.forEach(function(n){n.classList.toggle('on',+n.dataset.k===k);});}
+steps.forEach(function(s){s.addEventListener('mouseenter',function(){pick(+s.dataset.k);});s.addEventListener('click',function(){pick(+s.dataset.k);});});
+nodes.forEach(function(n){n.addEventListener('click',function(){pick(+n.dataset.k);});n.addEventListener('mouseenter',function(){pick(+n.dataset.k);});});
+
+/* duel comparatif */
+var DATA={
+  fr:{v:'70 000 €',w:7,col:'var(--rust)',tag:'930 000 € exposés.',tagc:'var(--rust)',sub:'garantie plafonnée à 70 000 €, et retraits gelables (loi Sapin 2).',
+    rows:[['Garantie en cas de défaillance','Plafond 70 000 €','bad'],['Retraits en cas de crise','Gelables, loi Sapin 2','bad'],['Vos actifs','Au bilan de l\'assureur','bad'],['Fonds dédiés multidevises','Limités','bad']]},
+  lx:{v:'1 000 000 €',w:100,col:'var(--green)',tag:'100 % protégé.',tagc:'#49c187',sub:'créancier de 1er rang, actifs ségrégués, hors risque de gel.',
+    rows:[['Garantie en cas de défaillance','Intégrale, 1er rang','good'],['Retraits en cas de crise','Toujours disponibles','good'],['Vos actifs','Ségrégués, hors bilan','good'],['Fonds dédiés multidevises','Oui, sur-mesure','good']]}
+};
+var dv=document.getElementById('dv'),fb=document.getElementById('fb'),vtag=document.getElementById('vtag'),vsub=document.getElementById('vsub'),rows=document.getElementById('rows'),tbtns=document.querySelectorAll('.toggle button');
+var chk='<svg viewBox="0 0 24 24" fill="none" stroke="#49c187" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>';
+var crs='<svg viewBox="0 0 24 24" fill="none" stroke="#c86a46" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+function setDuel(t){
+  var d=DATA[t];dv.textContent=d.v;fb.style.width=Math.max(d.w,4)+'%';fb.style.background=d.col;
+  vtag.textContent=d.tag;vtag.style.color=d.tagc;vsub.textContent=d.sub;
+  rows.innerHTML=d.rows.map(function(r){return '<div class="r"><span class="k">'+r[0]+'</span><span class="v '+r[2]+'">'+(r[2]==='good'?chk:crs)+r[1]+'</span></div>';}).join('');
+  tbtns.forEach(function(b){b.classList.toggle('on',b.dataset.t===t);});
+}
+tbtns.forEach(function(b){b.addEventListener('click',function(){setDuel(b.dataset.t);});});
+setDuel('fr');
+</script>
+</body></html>

@@ -1,0 +1,233 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Patrimlia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap">
+<style>
+:root{
+  --paper:#f4f1ea; --mut:#b9b2a6; --line:rgba(244,241,234,.16);
+  --gold:#caa568; --arch:"Archivo",system-ui,sans-serif; --fr:"Fraunces",Georgia,serif;
+}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{font-family:var(--arch);background:#0b0a09;color:var(--paper);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.stage{position:relative;min-height:100vh;display:flex;flex-direction:column;overflow:hidden}
+
+.grade{position:absolute;inset:0;z-index:0;opacity:0;transition:opacity 1s ease}
+.grade.on{opacity:1}
+.g0{background:
+  radial-gradient(70% 90% at 78% 18%,rgba(39,148,96,.42),transparent 58%),
+  radial-gradient(60% 80% at 12% 92%,rgba(12,60,40,.6),transparent 60%),
+  linear-gradient(135deg,#07130d,#0a1b12 55%,#06100b)}
+.g1{background:
+  radial-gradient(70% 90% at 80% 16%,rgba(202,165,104,.38),transparent 56%),
+  radial-gradient(55% 75% at 10% 95%,rgba(60,45,20,.6),transparent 60%),
+  linear-gradient(135deg,#0c0a07,#17120b 55%,#0a0806)}
+.g2{background:
+  radial-gradient(70% 90% at 80% 16%,rgba(120,150,210,.4),transparent 56%),
+  radial-gradient(55% 80% at 8% 95%,rgba(20,34,66,.7),transparent 60%),
+  linear-gradient(135deg,#070a12,#0c1220 55%,#060910)}
+.g3{background:
+  radial-gradient(70% 90% at 80% 16%,rgba(176,86,60,.4),transparent 56%),
+  radial-gradient(55% 80% at 8% 95%,rgba(70,30,24,.65),transparent 60%),
+  linear-gradient(135deg,#120807,#1e0d0a 55%,#0d0605)}
+.grain{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.055;
+  background-image:radial-gradient(rgba(255,255,255,.9) .5px,transparent .5px);background-size:3px 3px}
+.vig{position:absolute;inset:0;z-index:1;pointer-events:none;
+  box-shadow:inset 0 0 240px 60px rgba(0,0,0,.6);background:linear-gradient(180deg,rgba(0,0,0,.35),transparent 24%,transparent 60%,rgba(0,0,0,.6))}
+
+.ghost{position:absolute;z-index:1;right:-2vw;bottom:-5vh;font-family:var(--arch);font-weight:900;
+  font-size:30vw;line-height:.8;letter-spacing:-.04em;color:rgba(244,241,234,.05);
+  font-variant-numeric:tabular-nums;white-space:nowrap;pointer-events:none;user-select:none;
+  animation:floaty 9s ease-in-out infinite alternate}
+@keyframes floaty{from{transform:translateY(0)}to{transform:translateY(-14px)}}
+
+.wrap{width:100%;max-width:1320px;margin:0 auto;padding-inline:48px;position:relative;z-index:3}
+nav{display:flex;align-items:center;justify-content:space-between;padding-block:26px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:1.22rem;letter-spacing:-0.01em}
+.brand .mk{width:33px;height:33px;border-radius:9px;border:1px solid var(--gold);display:grid;place-items:center}
+.brand .mk svg{width:16px;height:16px;color:var(--gold)}
+.links{display:flex;gap:34px}
+.links a{font-size:.9rem;font-weight:500;color:var(--paper);opacity:.68;text-decoration:none}
+.links a:hover{opacity:1}
+.navcta{font-size:.88rem;font-weight:600;color:#0b0a09;background:var(--paper);border-radius:999px;padding:11px 22px;text-decoration:none}
+
+.content{flex:1;display:flex;flex-direction:column;justify-content:center;padding-block:20px}
+.anim{opacity:0;transform:translateY(16px);animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+.kicker{display:flex;align-items:center;gap:12px;margin-bottom:22px;animation-delay:.05s}
+.kicker .seg{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.kicker .ln{height:1px;width:52px;background:var(--gold);opacity:.6}
+.kicker .cap{font-size:.82rem;color:var(--mut);font-variant-numeric:tabular-nums}
+h1{font-family:var(--arch);font-weight:900;letter-spacing:-0.035em;line-height:.96;
+  font-size:clamp(2.8rem,7.2vw,6.6rem);max-width:15ch;margin-left:-4px;animation-delay:.12s}
+h1 .thin{font-family:var(--fr);font-weight:400;font-style:italic;letter-spacing:-.01em}
+.sub{margin-top:26px;font-size:clamp(1.05rem,1.5vw,1.3rem);line-height:1.5;color:#e6e1d6;max-width:46ch;font-weight:500;animation-delay:.2s}
+.statline{margin-top:22px;display:flex;align-items:center;gap:16px;font-size:.86rem;color:var(--mut);flex-wrap:wrap;animation-delay:.28s}
+.statline b{color:var(--paper);font-weight:700;font-variant-numeric:tabular-nums}
+.statline .dot{width:4px;height:4px;border-radius:50%;background:var(--mut)}
+.actions{margin-top:38px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;animation-delay:.36s}
+.btn{font-size:1rem;font-weight:700;color:#0b0a09;background:var(--gold);border:none;border-radius:999px;padding:17px 32px;text-decoration:none;cursor:pointer;transition:.18s}
+.btn:hover{background:#dab878}
+.ghostlink{font-size:.95rem;font-weight:600;color:var(--paper);opacity:.85;text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:4px}
+.ghostlink:hover{opacity:1}
+
+/* controle */
+.control{position:relative;z-index:3;border-top:1px solid var(--line);background:rgba(10,9,8,.34);backdrop-filter:blur(5px)}
+.control .wrap{display:flex;align-items:flex-end;gap:34px;padding-block:20px 22px}
+.clab{display:flex;flex-direction:column;gap:3px;white-space:nowrap}
+.clab .t{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.clab .hint{font-size:.82rem;font-weight:600;color:var(--gold);display:flex;align-items:center;gap:7px;transition:opacity .4s}
+.clab .hint .ar{display:inline-flex;animation:swish 1.5s ease-in-out infinite}
+@keyframes swish{0%,100%{transform:translateX(-3px)}50%{transform:translateX(3px)}}
+.sld{position:relative;flex:1;min-width:0;padding-top:52px}
+.bubble{position:absolute;top:4px;left:12%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:2px;pointer-events:none;transition:left .12s ease}
+.bubble .bv{font-size:1.02rem;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;background:var(--gold);color:#0b0a09;padding:5px 12px;border-radius:8px;box-shadow:0 10px 24px -8px rgba(0,0,0,.7);white-space:nowrap}
+.bubble .bv::after{content:"";position:absolute;left:50%;bottom:-5px;transform:translateX(-50%) rotate(45deg);width:9px;height:9px;background:var(--gold)}
+.bubble.nudge{animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-6px)}}
+.track{position:relative;height:4px;background:rgba(244,241,234,.16);border-radius:3px}
+.tfill{position:absolute;left:0;top:0;height:100%;background:var(--gold);border-radius:3px;width:12%;transition:width .12s}
+input[type=range]{position:absolute;top:calc(52px - 13px);left:0;width:100%;height:30px;margin:0;background:transparent;-webkit-appearance:none;appearance:none;cursor:grab}
+input[type=range]:active{cursor:grabbing}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:24px;height:24px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 7px rgba(202,165,104,.16),0 6px 16px -4px rgba(0,0,0,.7);cursor:grab}
+input[type=range]::-moz-range-thumb{width:24px;height:24px;border:none;border-radius:50%;background:var(--gold);box-shadow:0 0 0 7px rgba(202,165,104,.16)}
+.ring{position:absolute;top:52px;left:12%;width:24px;height:24px;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;box-shadow:0 0 0 2px rgba(202,165,104,.6);animation:pulse 1.8s ease-out infinite;transition:left .12s}
+@keyframes pulse{0%{box-shadow:0 0 0 2px rgba(202,165,104,.55)}70%{box-shadow:0 0 0 16px rgba(202,165,104,0)}100%{box-shadow:0 0 0 16px rgba(202,165,104,0)}}
+.marks{display:flex;justify-content:space-between;margin-top:16px}
+.mark{font-size:.76rem;font-weight:600;color:var(--mut);opacity:.5;letter-spacing:.02em;cursor:pointer;transition:.2s;background:none;border:none;font-family:var(--arch)}
+.mark.on{color:var(--gold);opacity:1}
+.cnow{display:flex;flex-direction:column;align-items:flex-end;gap:2px;white-space:nowrap;min-width:160px}
+.cnow .t{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.cnow .v{font-size:1.5rem;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+
+@media(max-width:1024px){.links{display:none}}
+@media(max-width:720px){.wrap{padding-inline:24px}.control .wrap{flex-wrap:wrap;gap:14px 20px}.cnow{min-width:0;align-items:flex-start;order:-1}.ghost{font-size:46vw}.sld{flex-basis:100%}}
+</style></head>
+<body>
+<section class="stage">
+  <div class="grade g0 on"></div><div class="grade g1"></div><div class="grade g2"></div><div class="grade g3"></div>
+  <div class="grain"></div><div class="vig"></div>
+  <div class="ghost" id="ghost">500 000 €</div>
+
+  <nav class="wrap">
+    <span class="brand"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19l7-13 4.5 7.5 3-5L20 19z"/></svg></span>Patrimlia</span>
+    <div class="links"><a href="#">Le dispositif</a><a href="#">Comparatif</a><a href="#">La méthode</a><a href="#">Questions</a></div>
+    <a class="navcta" href="#">Mon étude</a>
+  </nav>
+
+  <div class="wrap content">
+    <div class="kicker anim"><span class="seg" id="seg">Patrimoine établi</span><span class="ln"></span><span class="cap" id="capk">de 500 000 € à 1 M€</span></div>
+    <h1 class="anim" id="h1">La protection des <span class="thin">grandes fortunes.</span></h1>
+    <p class="sub anim" id="sub">Triangle de sécurité, créancier de premier rang. À ce niveau, votre patrimoine change de catégorie, pas seulement de contrat.</p>
+    <div class="statline anim">
+      <span>Garanti en France <b>70 000 €</b></span><span class="dot"></span>
+      <span>Protégé au Luxembourg <b id="prot">500 000 €</b></span><span class="dot"></span>
+      <span>Hors loi Sapin 2</span>
+    </div>
+    <div class="actions anim">
+      <a class="btn" id="cta" href="#strategie-500k">Voir ma stratégie patrimoine établi</a>
+      <a class="ghostlink" href="#comparatif">Comparatif France / Luxembourg</a>
+    </div>
+  </div>
+
+  <div class="control"><div class="wrap">
+    <div class="clab">
+      <span class="t">Votre capital</span>
+      <span class="hint" id="hint"><span class="ar">‹ ›</span> glissez pour situer</span>
+    </div>
+    <div class="sld">
+      <div class="bubble nudge" id="bubble"><span class="bv" id="bv">500 000 €</span></div>
+      <div class="ring" id="ring"></div>
+      <div class="track"><div class="tfill" id="tfill"></div></div>
+      <input type="range" id="rng" min="0" max="100" value="36" step="1" aria-label="Votre capital">
+      <div class="marks">
+        <button class="mark" data-b="0" data-p="6">250 k€</button>
+        <button class="mark" data-b="1" data-p="36">500 k€</button>
+        <button class="mark" data-b="2" data-p="66">1 M€</button>
+        <button class="mark" data-b="3" data-p="94">3 M€ +</button>
+      </div>
+    </div>
+    <div class="cnow"><span class="t">Protégé</span><span class="v" id="now">500 000 €</span></div>
+  </div></div>
+</section>
+
+<script>
+(function(){
+  var rng=document.getElementById('rng'),tfill=document.getElementById('tfill'),
+      now=document.getElementById('now'),ghost=document.getElementById('ghost'),
+      prot=document.getElementById('prot'),seg=document.getElementById('seg'),
+      capk=document.getElementById('capk'),h1=document.getElementById('h1'),
+      sub=document.getElementById('sub'),cta=document.getElementById('cta'),
+      bubble=document.getElementById('bubble'),bv=document.getElementById('bv'),
+      ring=document.getElementById('ring'),hint=document.getElementById('hint'),
+      grades=[document.querySelector('.g0'),document.querySelector('.g1'),document.querySelector('.g2'),document.querySelector('.g3')],
+      marks=document.querySelectorAll('.mark');
+  function cap(p){
+    if(p<=25) return 250+(p/25)*250;
+    if(p<=50) return 500+((p-25)/25)*500;
+    if(p<=80) return 1000+((p-50)/30)*2000;
+    return 3000+((p-80)/20)*2000;
+  }
+  function euro(k){return (Math.round(k)*1000).toLocaleString('fr-FR')+' €';}
+  function ghostFmt(k){ if(k>=1000){var m=k/1000;return (m%1===0?m.toFixed(0):m.toFixed(1).replace('.',','))+' M€';} return euro(k);}
+  var SEG=[
+    {n:'Investisseur prévoyant',range:'de 250 000 € à 500 000 €',
+     h:'Votre capital, <span class="thin">hors de portée.</span>',
+     s:'Dès 250 000 €, c\'est le droit luxembourgeois qui protège votre épargne. Pas un plafond de garantie de 70 000 €.',
+     c:'Voir la stratégie à partir de 250 000 €',u:'#strategie-250k'},
+    {n:'Patrimoine établi',range:'de 500 000 € à 1 M€',
+     h:'La protection des <span class="thin">grandes fortunes.</span>',
+     s:'Triangle de sécurité, créancier de premier rang. À ce niveau, votre patrimoine change de catégorie, pas seulement de contrat.',
+     c:'Voir ma stratégie patrimoine établi',u:'#strategie-500k'},
+    {n:'Grande fortune',range:'de 1 M€ à 3 M€',
+     h:'Diversifier, <span class="thin">c\'est défendre.</span>',
+     s:'Multidevises, fonds dédiés, transmission optimisée. Une architecture patrimoniale complète sur un seul contrat.',
+     c:'Accéder à la stratégie grande fortune',u:'#strategie-1m'},
+    {n:'Famille & Family office',range:'3 M€ et au-delà',
+     h:'L\'architecture <span class="thin">d\'une famille.</span>',
+     s:'Fonds internes dédiés (FID, FAS), gouvernance familiale, un interlocuteur dédié à votre lignée.',
+     c:'Parler à un conseiller family office',u:'#family-office'}
+  ];
+  function idx(k){if(k<500)return 0;if(k<1000)return 1;if(k<3000)return 2;return 3;}
+  var cur=-1;
+  function render(){
+    var p=+rng.value,k=cap(p),i=idx(k),s=SEG[i];
+    tfill.style.width=Math.max(p,4)+'%';
+    var lx=Math.min(Math.max(p,4),97)+'%';
+    bubble.style.left=lx; ring.style.left=lx;
+    now.textContent=euro(k); prot.textContent=euro(k); ghost.textContent=ghostFmt(k); bv.textContent=euro(k);
+    if(i!==cur){
+      cur=i;
+      grades.forEach(function(g,j){g.classList.toggle('on',j===i);});
+      seg.textContent=s.n; capk.textContent=s.range;
+      h1.innerHTML=s.h; sub.textContent=s.s;
+      cta.textContent=s.c; cta.setAttribute('href',s.u);
+      marks.forEach(function(m){m.classList.toggle('on',+m.dataset.b===i);});
+    }
+  }
+  var touched=false;
+  function engage(){ if(touched)return; touched=true;
+    bubble.classList.remove('nudge'); ring.style.display='none';
+    if(hint){hint.style.opacity='0';} }
+  rng.addEventListener('input',function(){engage();render();});
+  marks.forEach(function(m){m.addEventListener('click',function(){engage();rng.value=m.dataset.p;render();});});
+  render();
+
+  /* demo auto : une seule fois, montre que ca se glisse */
+  var demoRAF;
+  function demo(){
+    var start=performance.now(),dur=1300,from=36,to=52;
+    function step(t){
+      if(touched)return;
+      var k=(t-start)/dur;
+      if(k>=1){rng.value=from;render();return;}
+      var e=k<.5?(k*2):(2-k*2); // aller-retour
+      var ease=e<.5?2*e*e:-1+(4-2*e)*e;
+      rng.value=from+(to-from)*ease;render();
+      demoRAF=requestAnimationFrame(step);
+    }
+    demoRAF=requestAnimationFrame(step);
+  }
+  setTimeout(demo,1100);
+})();
+</script>
+</body></html>
