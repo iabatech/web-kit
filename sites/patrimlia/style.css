@@ -269,3 +269,15 @@ footer .legal{font-size:.78rem;color:#6b645b;max-width:30ch;line-height:1.5}
 .modal .mdone .ok svg{width:28px;height:28px;color:#fff}
 .modal .mdone h3{font-size:1.4rem;margin:0 auto}
 .modal .mdone p{color:var(--mut);margin-top:10px}
+
+/* ===== wizard : lifting des options + progression ===== */
+.opt{padding:18px 20px;position:relative;overflow:hidden}
+.opt::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold);transform:scaleY(0);transform-origin:center;transition:transform .2s}
+.opt:hover::before,.opt.sel::before{transform:scaleY(1)}
+.opt:hover,.opt.sel{transform:translateX(3px)}
+.opt .ar{transition:transform .2s}
+.opt:hover .ar,.opt.sel .ar{transform:translateX(4px)}
+.wsteps{gap:8px}
+.wstep{height:5px;border-radius:3px;transition:background .3s}
+.wstep.on{background:linear-gradient(90deg,var(--gold),var(--gold-d))}
+@media(prefers-reduced-motion:reduce){.opt:hover,.opt.sel{transform:none}.opt:hover .ar,.opt.sel .ar{transform:none}}

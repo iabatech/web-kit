@@ -4,6 +4,7 @@ document.querySelectorAll('.rv,.triangle').forEach(function(el){io.observe(el);}
 /* hero slider */
 (function(){
   var rng=document.getElementById('rng'),tfill=document.getElementById('tfill'),now=document.getElementById('now'),prot=document.getElementById('prot'),seg=document.getElementById('seg'),capk=document.getElementById('capk'),h1=document.getElementById('h1'),sub=document.getElementById('sub'),cta=document.getElementById('cta'),bubble=document.getElementById('bubble'),bv=document.getElementById('bv'),ring=document.getElementById('ring'),hint=document.getElementById('hint'),grades=[document.querySelector('.g0'),document.querySelector('.g1'),document.querySelector('.g2'),document.querySelector('.g3')],marks=document.querySelectorAll('.mark');
+  if(!rng)return;
   function cap(p){if(p<=25)return 250+(p/25)*250;if(p<=50)return 500+((p-25)/25)*500;if(p<=80)return 1000+((p-50)/30)*2000;return 3000+((p-80)/20)*2000;}
   function euro(k){return (Math.round(k)*1000).toLocaleString('fr-FR')+' €';}
   var SEG=[{n:'Investisseur prévoyant',range:'de 250 000 € à 500 000 €',h:'Votre capital, <span class="thin">hors de portée.</span>',s:'Dès 250 000 €, c\'est le droit luxembourgeois qui protège votre épargne. Pas un plafond de garantie de 70 000 €.',c:'Voir la stratégie à partir de 250 000 €'},
@@ -36,7 +37,7 @@ document.querySelectorAll('.rv,.triangle').forEach(function(el){io.observe(el);}
 /* wizard : 2 étapes (objectif + coordonnées), tranche reprise du slider */
 (function(){var panes=document.querySelectorAll('.wpane'),steps=document.querySelectorAll('.wstep');
   if(!panes.length) return;
-  function sync(){var t=window.__patrimTranche||'';document.querySelectorAll('.wpane [data-wtranche]').forEach(function(el){el.textContent=t;});var h=document.querySelector('.wpane input[name=tranche]');if(h)h.value=t;}
+  function sync(){var t=window.__patrimTranche;if(!t)return;document.querySelectorAll('.wpane [data-wtranche]').forEach(function(el){el.textContent=t;});var h=document.querySelector('.wpane input[name=tranche]');if(h)h.value=t;}
   function show(n){panes.forEach(function(p){p.hidden=(+p.dataset.pane!==n);});steps.forEach(function(s){s.classList.toggle('on',+s.dataset.s<=Math.min(n,1));});}
   panes[0].querySelectorAll('.opt').forEach(function(b){b.addEventListener('click',function(){sync();show(1);});});
   var back=document.querySelector('[data-back]');if(back)back.addEventListener('click',function(){show(0);});
@@ -47,12 +48,13 @@ document.querySelectorAll('.rv,.triangle').forEach(function(el){io.observe(el);}
 /* modal popup + cta flottant + cta de section */
 (function(){var modal=document.getElementById('modal');if(!modal)return;
   var form=modal.querySelector('form'),done=modal.querySelector('.mdone');
-  function open(e){if(e)e.preventDefault();var t=window.__patrimTranche||'';modal.querySelectorAll('[data-mtranche]').forEach(function(el){el.textContent=t;});var h=modal.querySelector('input[name=tranche]');if(h)h.value=t;modal.classList.add('open');document.body.style.overflow='hidden';}
+  function open(e){if(e)e.preventDefault();var t=window.__patrimTranche;if(t){modal.querySelectorAll('[data-mtranche]').forEach(function(el){el.textContent=t;});var h=modal.querySelector('input[name=tranche]');if(h)h.value=t;}modal.classList.add('open');document.body.style.overflow='hidden';}
   function close(){modal.classList.remove('open');document.body.style.overflow='';}
   modal.addEventListener('click',function(e){if(e.target===modal)close();});
   var x=modal.querySelector('.x');if(x)x.addEventListener('click',close);
   document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
   ['slidecta','methodecta','fab'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('click',open);});
+  document.querySelectorAll('.js-open-modal').forEach(function(el){el.addEventListener('click',open);});
   if(form)form.addEventListener('submit',function(e){e.preventDefault();var hd=modal.querySelector('.mhead');if(hd)hd.style.display='none';form.style.display='none';if(done)done.hidden=false;});
   var fab=document.getElementById('fab');if(fab)window.addEventListener('scroll',function(){fab.classList.toggle('show',window.scrollY>600);},{passive:true});
 })();
