@@ -299,6 +299,20 @@ footer .legal{font-size:.78rem;color:#6b645b;max-width:30ch;line-height:1.5}
 @media(prefers-reduced-motion:reduce){.tnode:hover,.tnode.on{transform:none}}
 @media(max-width:560px){.trow{grid-template-columns:1fr}}
 
+/* ===== triangle — version éditoriale sobre ===== */
+.edi{width:100%;max-width:540px}
+.edi-big{font-family:var(--fr);font-style:italic;font-weight:400;font-size:clamp(1.5rem,3vw,2.05rem);line-height:1.2;color:var(--paper);margin:0 0 26px}
+.edi-big .thin{font-style:italic}
+.edi-row{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:baseline;padding:20px 0;border-top:1px solid var(--line)}
+.edi-row .edi-no{font-family:var(--fr);font-style:italic;font-size:1.1rem;color:var(--gold-d)}
+.edi-row .edi-mid b{font-weight:700;font-size:1.05rem;display:block}
+.edi-row .edi-mid span{font-size:.9rem;color:var(--mut)}
+.edi-row .edi-kw{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);white-space:nowrap}
+.edi-seal{margin-top:24px;padding-top:22px;border-top:1px solid var(--line);display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.edi-seal b{font-weight:800;font-size:1.05rem}
+.edi-seal span{color:var(--green);color:#49c187;font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700}
+@media(max-width:560px){.edi-row{grid-template-columns:auto 1fr;gap:4px 14px}.edi-row .edi-kw{grid-column:2;justify-self:start;margin-top:2px}}
+
 /* ===== plein écran sur pages gabarit par défaut (route B, sans canvas) ===== */
 body.page-template-default{--wp--style--global--content-size:100%;--wp--style--global--wide-size:100%;background:var(--obs);margin:0}
 body.page-template-default a.skip-link,
