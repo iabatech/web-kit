@@ -224,3 +224,48 @@ footer .legal{font-size:.78rem;color:#6b645b;max-width:30ch;line-height:1.5}
 @media(max-width:1024px){.links{display:none}.stats{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2){border-right:none}}
 @media(max-width:880px){.fgrid,.tgrid,.human{grid-template-columns:1fr;gap:38px}.brk{background-attachment:scroll}}
 @media(max-width:720px){.wrap{padding-inline:22px}.control .wrap{flex-wrap:wrap;gap:14px 20px}.cnow{min-width:0;align-items:flex-start;order:-1}.sld{flex-basis:100%}.band{padding-block:76px}.stats{grid-template-columns:1fr}.stat{border-right:none;border-bottom:1px solid var(--line)}.scene .top,.scene .r{padding-inline:24px}.range{bottom:150px}}
+
+/* ===== CTA à la clé du slider ===== */
+.ctl-cta{padding:13px 22px;font-size:.92rem;white-space:nowrap;align-self:center}
+@media(max-width:720px){.ctl-cta{width:100%;text-align:center;order:2}}
+
+/* ===== CTA à la suite d'une section ===== */
+.secta{margin-top:30px;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+
+/* ===== conseiller (refonte : vraie photo + cartouche) ===== */
+.humimg{aspect-ratio:4/5;border-radius:20px;border:1px solid var(--line);position:relative;overflow:hidden;background:#0a0d0b;box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
+.humimg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%;filter:grayscale(.12) contrast(1.02)}
+.humimg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 42%,rgba(7,6,5,.88))}
+.humcap{position:absolute;left:18px;right:18px;bottom:18px;z-index:2;display:flex;align-items:center;gap:12px}
+.humcap .av{width:46px;height:46px;border-radius:50%;border:1px solid var(--gold);display:grid;place-items:center;flex:none;background:rgba(11,10,9,.45)}
+.humcap .av svg{width:20px;height:20px;color:var(--gold)}
+.humcap .nm{font-weight:800;font-size:1rem;line-height:1.15}
+.humcap .ro{font-size:.8rem;color:var(--mut);margin-top:2px}
+
+/* ===== CTA flottant ===== */
+.fab{position:fixed;right:22px;bottom:22px;z-index:60;display:inline-flex;align-items:center;gap:9px;font-family:var(--arch);font-weight:700;font-size:.95rem;color:#0b0a09;background:var(--gold);border:none;border-radius:999px;padding:15px 24px;cursor:pointer;box-shadow:0 12px 34px -8px rgba(0,0,0,.75);opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .4s,transform .4s,background .18s}
+.fab.show{opacity:1;transform:none;pointer-events:auto}
+.fab:hover{background:#dab878}
+.fab svg{width:18px;height:18px}
+@media(max-width:720px){.fab{right:14px;bottom:14px;padding:13px 20px;font-size:.9rem}}
+
+/* ===== MODAL formulaire ===== */
+.modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:22px;background:rgba(5,4,3,.72);backdrop-filter:blur(6px)}
+.modal.open{display:flex}
+.modal .box{position:relative;width:100%;max-width:460px;background:#12100d;border:1px solid var(--line);border-radius:22px;padding:34px 32px;box-shadow:0 30px 80px -20px rgba(0,0,0,.85);max-height:92vh;overflow:auto}
+.modal .x{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:none;color:var(--paper);cursor:pointer;font-size:1.2rem;line-height:1;display:grid;place-items:center}
+.modal .x:hover{border-color:var(--gold);color:var(--gold)}
+.modal .eyebrow{display:block;margin-bottom:10px}
+.modal h3{font-weight:900;letter-spacing:-.02em;font-size:1.5rem;line-height:1.05;max-width:20ch}
+.modal .mtr{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:7px 14px;border-radius:999px;background:rgba(202,165,104,.12);border:1px solid rgba(202,165,104,.3);font-size:.82rem;font-weight:700;color:var(--gold)}
+.modal form{margin-top:20px;display:flex;flex-direction:column;gap:11px}
+.modal input{font-family:var(--arch);font-size:1rem;color:var(--paper);background:rgba(244,241,234,.04);border:1px solid var(--line);border-radius:12px;padding:15px 18px}
+.modal input::placeholder{color:var(--mut)}
+.modal .btn{margin-top:6px;width:100%;text-align:center}
+.modal .mnote{display:flex;align-items:center;gap:9px;margin-top:14px;font-size:.78rem;color:var(--mut)}
+.modal .mnote svg{width:15px;height:15px;color:var(--green);flex:none}
+.modal .mdone{text-align:center;padding:14px 0}
+.modal .mdone .ok{width:56px;height:56px;border-radius:50%;background:var(--green-d);display:grid;place-items:center;margin:0 auto 18px}
+.modal .mdone .ok svg{width:28px;height:28px;color:#fff}
+.modal .mdone h3{font-size:1.4rem;margin:0 auto}
+.modal .mdone p{color:var(--mut);margin-top:10px}

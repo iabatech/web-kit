@@ -13,7 +13,7 @@ document.querySelectorAll('.rv,.triangle').forEach(function(el){io.observe(el);}
   function idx(k){if(k<500)return 0;if(k<1000)return 1;if(k<3000)return 2;return 3;}
   var cur=-1;
   function render(){var p=+rng.value,k=cap(p),i=idx(k),s=SEG[i];tfill.style.width=Math.max(p,4)+'%';var lx=Math.min(Math.max(p,4),97)+'%';bubble.style.left=lx;ring.style.left=lx;now.textContent=euro(k);prot.textContent=euro(k);bv.textContent=euro(k);
-    if(i!==cur){cur=i;grades.forEach(function(g,j){g.classList.toggle('on',j===i);});seg.textContent=s.n;capk.textContent=s.range;h1.innerHTML=s.h;sub.textContent=s.s;cta.textContent=s.c;marks.forEach(function(m){m.classList.toggle('on',+m.dataset.b===i);});}}
+    if(i!==cur){cur=i;grades.forEach(function(g,j){g.classList.toggle('on',j===i);});seg.textContent=s.n;capk.textContent=s.range;h1.innerHTML=s.h;sub.textContent=s.s;cta.textContent=s.c;marks.forEach(function(m){m.classList.toggle('on',+m.dataset.b===i);});var sc=document.getElementById('slidecta');if(sc)sc.textContent='Mon étude · '+s.range;window.__patrimTranche=s.range;}}
   var touched=false;function engage(){if(touched)return;touched=true;bubble.classList.remove('nudge');ring.style.display='none';if(hint)hint.style.opacity='0';}
   rng.addEventListener('input',function(){engage();render();});marks.forEach(function(m){m.addEventListener('click',function(){engage();rng.value=m.dataset.p;render();});});render();
   function demo(){var start=performance.now(),dur=1300,from=36,to=52;function step(t){if(touched)return;var kk=(t-start)/dur;if(kk>=1){rng.value=from;render();return;}var e=kk<.5?(kk*2):(2-kk*2);var ease=e<.5?2*e*e:-1+(4-2*e)*e;rng.value=from+(to-from)*ease;render();requestAnimationFrame(step);}requestAnimationFrame(step);}
@@ -33,11 +33,26 @@ document.querySelectorAll('.rv,.triangle').forEach(function(el){io.observe(el);}
   function setDuel(t){var d=DATA[t];dv.textContent=d.v;fb.style.width=Math.max(d.w,4)+'%';fb.style.background=d.col;vtag.textContent=d.tag;vtag.style.color=d.tagc;vsub.textContent=d.sub;rows.innerHTML=d.rows.map(function(r){return '<div class="r"><span class="k">'+r[0]+'</span><span class="v '+r[2]+'">'+(r[2]==='good'?chk:crs)+r[1]+'</span></div>';}).join('');tbtns.forEach(function(b){b.classList.toggle('on',b.dataset.t===t);});}
   tbtns.forEach(function(b){b.addEventListener('click',function(){setDuel(b.dataset.t);});});setDuel('fr');})();
 
-/* wizard */
+/* wizard : 2 étapes (objectif + coordonnées), tranche reprise du slider */
 (function(){var panes=document.querySelectorAll('.wpane'),steps=document.querySelectorAll('.wstep');
-  function show(n){panes.forEach(function(p){p.hidden=(+p.dataset.pane!==n);});steps.forEach(function(s){s.classList.toggle('on',+s.dataset.s<=Math.min(n,2));});}
-  panes[0].querySelectorAll('.opt').forEach(function(b){b.addEventListener('click',function(){show(1);});});
-  panes[1].querySelectorAll('.opt').forEach(function(b){b.addEventListener('click',function(){show(2);});});
-  document.querySelector('[data-back]').addEventListener('click',function(){show(1);});
-  document.getElementById('submit').addEventListener('click',function(){show(3);steps.forEach(function(s){s.classList.add('on');});});
-  var hcta=document.getElementById('cta');if(hcta)hcta.addEventListener('click',function(){show(1);});})();
+  if(!panes.length) return;
+  function sync(){var t=window.__patrimTranche||'';document.querySelectorAll('.wpane [data-wtranche]').forEach(function(el){el.textContent=t;});var h=document.querySelector('.wpane input[name=tranche]');if(h)h.value=t;}
+  function show(n){panes.forEach(function(p){p.hidden=(+p.dataset.pane!==n);});steps.forEach(function(s){s.classList.toggle('on',+s.dataset.s<=Math.min(n,1));});}
+  panes[0].querySelectorAll('.opt').forEach(function(b){b.addEventListener('click',function(){sync();show(1);});});
+  var back=document.querySelector('[data-back]');if(back)back.addEventListener('click',function(){show(0);});
+  var sub=document.getElementById('submit');if(sub)sub.addEventListener('click',function(){show(2);steps.forEach(function(s){s.classList.add('on');});});
+  var hcta=document.getElementById('cta');if(hcta)hcta.addEventListener('click',function(){sync();show(0);});
+  sync();})();
+
+/* modal popup + cta flottant + cta de section */
+(function(){var modal=document.getElementById('modal');if(!modal)return;
+  var form=modal.querySelector('form'),done=modal.querySelector('.mdone');
+  function open(e){if(e)e.preventDefault();var t=window.__patrimTranche||'';modal.querySelectorAll('[data-mtranche]').forEach(function(el){el.textContent=t;});var h=modal.querySelector('input[name=tranche]');if(h)h.value=t;modal.classList.add('open');document.body.style.overflow='hidden';}
+  function close(){modal.classList.remove('open');document.body.style.overflow='';}
+  modal.addEventListener('click',function(e){if(e.target===modal)close();});
+  var x=modal.querySelector('.x');if(x)x.addEventListener('click',close);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+  ['slidecta','methodecta','fab'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('click',open);});
+  if(form)form.addEventListener('submit',function(e){e.preventDefault();var hd=modal.querySelector('.mhead');if(hd)hd.style.display='none';form.style.display='none';if(done)done.hidden=false;});
+  var fab=document.getElementById('fab');if(fab)window.addEventListener('scroll',function(){fab.classList.toggle('show',window.scrollY>600);},{passive:true});
+})();
