@@ -22,7 +22,7 @@ document.querySelectorAll('.rv,.triangle').forEach(function(el){io.observe(el);}
 })();
 
 /* triangle */
-(function(){var steps=document.querySelectorAll('.tpanel .step'),nodes=document.querySelectorAll('.node');
+(function(){var steps=document.querySelectorAll('.tpanel .step'),nodes=document.querySelectorAll('.tnode');
   function pick(k){steps.forEach(function(s){s.classList.toggle('on',+s.dataset.k===k);});nodes.forEach(function(n){n.classList.toggle('on',+n.dataset.k===k);});}
   steps.forEach(function(s){s.addEventListener('mouseenter',function(){pick(+s.dataset.k);});s.addEventListener('click',function(){pick(+s.dataset.k);});});
   nodes.forEach(function(n){n.addEventListener('click',function(){pick(+n.dataset.k);});n.addEventListener('mouseenter',function(){pick(+n.dataset.k);});});})();

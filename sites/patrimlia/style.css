@@ -281,3 +281,33 @@ footer .legal{font-size:.78rem;color:#6b645b;max-width:30ch;line-height:1.5}
 .wstep{height:5px;border-radius:3px;transition:background .3s}
 .wstep.on{background:linear-gradient(90deg,var(--gold),var(--gold-d))}
 @media(prefers-reduced-motion:reduce){.opt:hover,.opt.sel{transform:none}.opt:hover .ar,.opt.sel .ar{transform:none}}
+
+/* ===== triangle de sécurité (version robuste, cartes) ===== */
+.trust{display:flex;flex-direction:column;gap:16px;max-width:520px;margin:0 auto;width:100%}
+.tnode{display:flex;align-items:center;gap:15px;text-align:left;width:100%;font-family:var(--arch);background:rgba(244,241,234,.03);border:1px solid var(--line);border-radius:16px;padding:16px 18px;cursor:pointer;transition:border-color .2s,background .2s,transform .2s;color:var(--paper)}
+.tnode:hover,.tnode.on{border-color:var(--gold);background:rgba(202,165,104,.08);transform:translateY(-2px)}
+.tdot{width:46px;height:46px;border-radius:50%;flex:none;display:grid;place-items:center;background:#0d1a15;border:1px solid var(--line);transition:border-color .2s}
+.tnode:hover .tdot,.tnode.on .tdot{border-color:var(--gold)}
+.tdot svg{width:22px;height:22px;color:var(--gold)}
+.tmeta{display:flex;flex-direction:column;gap:2px;min-width:0}
+.tmeta b{font-weight:700;font-size:1.02rem;color:var(--paper)}
+.tmeta em{font-style:normal;font-size:.84rem;color:var(--mut)}
+.tseal{text-align:center;padding:16px 18px;border-radius:16px;background:radial-gradient(circle,rgba(31,148,96,.18),rgba(31,148,96,.04));border:1px solid rgba(31,148,96,.4)}
+.tseal b{display:block;font-weight:800;font-size:1.05rem;color:var(--paper)}
+.tseal span{font-size:.74rem;color:#49c187;text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+.trow{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(prefers-reduced-motion:reduce){.tnode:hover,.tnode.on{transform:none}}
+@media(max-width:560px){.trow{grid-template-columns:1fr}}
+
+/* ===== plein écran sur pages gabarit par défaut (route B, sans canvas) ===== */
+body.page-template-default{--wp--style--global--content-size:100%;--wp--style--global--wide-size:100%;background:var(--obs);margin:0}
+body.page-template-default header.wp-block-template-part,
+body.page-template-default footer.wp-block-template-part,
+body.page-template-default .wp-block-site-title,
+body.page-template-default .wp-block-navigation{display:none!important}
+body.page-template-default .wp-site-blocks,
+body.page-template-default main.wp-block-group,
+body.page-template-default .entry-content,
+body.page-template-default .wp-block-post-content{max-width:none!important;margin:0!important;padding:0!important}
+body.page-template-default .wp-block-post-content>*,
+body.page-template-default .entry-content>*{max-width:none!important;margin-left:0!important;margin-right:0!important}
