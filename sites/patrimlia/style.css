@@ -208,9 +208,9 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border:none;border-ra
 
 /* final over mountain */
 .final{position:relative;text-align:center;padding-block:150px;background-size:cover;background-position:center}
-.final::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--obs),rgba(11,10,9,.55) 40%,rgba(11,10,9,.9))}
+.final::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,10,9,.9),rgba(11,10,9,.74) 45%,rgba(11,10,9,.96))}
 .final .wrap{position:relative}
-.final h2{font-weight:900;letter-spacing:-.03em;font-size:clamp(2.3rem,5.4vw,4.4rem);line-height:1;max-width:20ch;margin:0 auto}
+.final h2{font-weight:900;letter-spacing:-.03em;font-size:clamp(2.3rem,5.4vw,4.4rem);line-height:1;max-width:20ch;margin:0 auto;color:var(--paper);text-shadow:0 2px 28px rgba(0,0,0,.7)}
 .final p{margin:22px auto 0;font-size:1.1rem;color:#e6e1d6;max-width:44ch}
 .final .btn{margin-top:36px}
 
