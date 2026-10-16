@@ -94,7 +94,7 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border:none;border-ra
 .faille{background:#0d0b09}
 .fgrid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}
 .bigstat{font-weight:900;font-size:clamp(3.2rem,7.5vw,6.4rem);letter-spacing:-.04em;line-height:.9;color:var(--gold)}
-.bigstat small{display:block;font-size:1rem;font-weight:600;color:var(--mut);margin-top:16px;max-width:30ch}
+.bigstat small{display:block;font-size:1rem;font-weight:600;letter-spacing:normal;line-height:1.45;color:var(--mut);margin-top:16px;max-width:30ch}
 .failrow{display:flex;gap:16px;align-items:flex-start;background:rgba(244,241,234,.03);border:1px solid var(--line);padding:20px 22px;border-radius:14px;margin-bottom:12px}
 .failrow svg{width:22px;height:22px;color:var(--gold);flex:none;margin-top:1px}
 .failrow b{font-weight:700;font-size:1rem}
