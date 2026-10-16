@@ -12,6 +12,11 @@ function patrimSend(d,ok,err){
     .catch(function(){err&&err();});
 }
 
+/* Google Ads : balise de base + conversion lead */
+var PATRIM_AW='AW-18517396949';
+(function(){try{window.dataLayer=window.dataLayer||[];window.gtag=window.gtag||function(){window.dataLayer.push(arguments);};var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+PATRIM_AW;document.head.appendChild(s);gtag('js',new Date());gtag('config',PATRIM_AW);}catch(e){}})();
+function patrimConversion(){try{if(window.gtag)gtag('event','conversion',{send_to:PATRIM_AW+'/yfRDCLibrp8dENWb5P1E',value:1.0,currency:'EUR'});}catch(e){}}
+
 /* hero slider */
 (function(){
   var rng=document.getElementById('rng'),tfill=document.getElementById('tfill'),now=document.getElementById('now'),prot=document.getElementById('prot'),seg=document.getElementById('seg'),capk=document.getElementById('capk'),h1=document.getElementById('h1'),sub=document.getElementById('sub'),cta=document.getElementById('cta'),bubble=document.getElementById('bubble'),bv=document.getElementById('bv'),ring=document.getElementById('ring'),hint=document.getElementById('hint'),grades=[document.querySelector('.g0'),document.querySelector('.g1'),document.querySelector('.g2'),document.querySelector('.g3')],marks=document.querySelectorAll('.mark');
@@ -63,7 +68,7 @@ function patrimSend(d,ok,err){
     if(!EMAIL_RE.test(email)){if(emEl)emEl.focus();return;}
     sub.disabled=true;var lbl=sub.textContent;sub.textContent='Envoi…';
     patrimSend({nom:nom,email:email,pays:pays,tranche:tranche,objectif:window.__patrimObjectif||''},
-      function(){show(2);steps.forEach(function(s){s.classList.add('on');});},
+      function(){patrimConversion();show(2);steps.forEach(function(s){s.classList.add('on');});},
       function(){sub.disabled=false;sub.textContent=lbl;alert('Un souci est survenu lors de l\'envoi. Réessayez, ou écrivez-nous à contact@iaba.tech.');});
   });
   var hcta=document.getElementById('cta');if(hcta)hcta.addEventListener('click',function(){sync();show(0);});
@@ -90,7 +95,7 @@ function patrimSend(d,ok,err){
     if(!EMAIL_RE.test(email)){if(emEl)emEl.focus();return;}
     var lbl=btn?btn.textContent:'';if(btn){btn.disabled=true;btn.textContent='Envoi…';}
     patrimSend({nom:nom,email:email,pays:pays,tranche:tranche,objectif:window.__patrimObjectif||''},
-      function(){var hd=modal.querySelector('.mhead');if(hd)hd.style.display='none';form.style.display='none';if(done)done.hidden=false;},
+      function(){patrimConversion();var hd=modal.querySelector('.mhead');if(hd)hd.style.display='none';form.style.display='none';if(done)done.hidden=false;},
       function(){if(btn){btn.disabled=false;btn.textContent=lbl;}alert('Un souci est survenu lors de l\'envoi. Réessayez, ou écrivez-nous à contact@iaba.tech.');});
   });
   var fab=document.getElementById('fab');if(fab)window.addEventListener('scroll',function(){fab.classList.toggle('show',window.scrollY>600);},{passive:true});
