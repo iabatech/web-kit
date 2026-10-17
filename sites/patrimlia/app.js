@@ -23,10 +23,10 @@ function patrimConversion(){try{if(window.gtag)gtag('event','conversion',{send_t
   if(!rng)return;
   function cap(p){if(p<=25)return 250+(p/25)*250;if(p<=50)return 500+((p-25)/25)*500;if(p<=80)return 1000+((p-50)/30)*2000;return 3000+((p-80)/20)*2000;}
   function euro(k){return (Math.round(k)*1000).toLocaleString('fr-FR')+' €';}
-  var SEG=[{n:'Investisseur prévoyant',range:'de 250 000 € à 500 000 €',h:'Votre capital, <span class="thin">hors de portée.</span>',s:'Dès 250 000 €, c\'est le droit luxembourgeois qui protège votre épargne. Pas un plafond de garantie de 70 000 €.',c:'Voir la stratégie à partir de 250 000 €'},
-  {n:'Patrimoine établi',range:'de 500 000 € à 1 M€',h:'La protection des <span class="thin">grandes fortunes.</span>',s:'Triangle de sécurité, créancier de premier rang. À ce niveau, votre patrimoine change de catégorie, pas seulement de contrat.',c:'Voir ma stratégie patrimoine établi'},
-  {n:'Grande fortune',range:'de 1 M€ à 3 M€',h:'Diversifier, <span class="thin">c\'est défendre.</span>',s:'Multidevises, fonds dédiés, transmission optimisée. Une architecture patrimoniale complète sur un seul contrat.',c:'Accéder à la stratégie grande fortune'},
-  {n:'Famille & Family office',range:'3 M€ et au-delà',h:'L\'architecture <span class="thin">d\'une famille.</span>',s:'Fonds internes dédiés (FID, FAS), gouvernance familiale, un interlocuteur dédié à votre lignée.',c:'Parler à un conseiller family office'}];
+  var SEG=[{n:'Investisseur prévoyant',range:'de 250 000 € à 500 000 €',h:'Votre capital, <span class="thin">hors de portée.</span>',s:'Dès 250 000 €, ce n\'est plus un fonds de garantie plafonné qui protège votre épargne. C\'est le droit luxembourgeois.',c:'Voir ma stratégie'},
+  {n:'Patrimoine établi',range:'de 500 000 € à 1 M€',h:'La protection des <span class="thin">patrimoines établis.</span>',s:'Actifs séparés, créancier de premier rang. À ce niveau, votre épargne ne se contente plus d\'un contrat, elle change de cadre.',c:'Voir ma protection'},
+  {n:'Grande fortune',range:'de 1 M€ à 3 M€',h:'Diversifier, <span class="thin">c\'est protéger.</span>',s:'Multidevises, fonds dédiés, transmission préparée. Une architecture complète, tenue par un seul contrat.',c:'Accéder à la stratégie'},
+  {n:'Famille & Family office',range:'3 M€ et au-delà',h:'L\'architecture <span class="thin">d\'une lignée.</span>',s:'Fonds internes dédiés, gouvernance familiale, un interlocuteur pour la durée. Le niveau family office.',c:'Parler à un conseiller'}];
   function idx(k){if(k<500)return 0;if(k<1000)return 1;if(k<3000)return 2;return 3;}
   var cur=-1;
   function render(){var p=+rng.value,k=cap(p),i=idx(k),s=SEG[i];tfill.style.width=Math.max(p,4)+'%';var lx=Math.min(Math.max(p,4),97)+'%';bubble.style.left=lx;ring.style.left=lx;now.textContent=euro(k);prot.textContent=euro(k);bv.textContent=euro(k);
