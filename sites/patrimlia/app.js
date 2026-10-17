@@ -6,7 +6,7 @@ var PATRIM_WEBHOOK='https://outils.iaba.tech/webhook/patrimlia-lead';
 var EMAIL_RE=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 function patrimUTM(){try{var q=new URLSearchParams(location.search);return{utm_source:q.get('utm_source')||'',utm_medium:q.get('utm_medium')||'',utm_campaign:q.get('utm_campaign')||''};}catch(e){return{utm_source:'',utm_medium:'',utm_campaign:''};}}
 function patrimSend(d,ok,err){
-  var payload={nom:d.nom||'',email:d.email||'',pays:d.pays||'',tranche:d.tranche||'',objectif:d.objectif||'',site_web:d.site_web||'',page:location.href,attribution:patrimUTM()};
+  var payload={nom:d.nom||'',email:d.email||'',tel:d.tel||'',pays:d.pays||'',tranche:d.tranche||'',objectif:d.objectif||'',site_web:d.site_web||'',page:location.href,attribution:patrimUTM()};
   fetch(PATRIM_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
     .then(function(r){if(r.ok){ok&&ok();}else{err&&err();}})
     .catch(function(){err&&err();});
@@ -63,11 +63,13 @@ function patrimConversion(){try{if(window.gtag)gtag('event','conversion',{send_t
     var nom=texts[0]?texts[0].value.trim():'';
     var paysEl=p1.querySelector('#f-pays');var pays=paysEl?paysEl.value.trim():(texts[1]?texts[1].value.trim():'');
     var emEl=p1.querySelector('input[type=email]');var email=emEl?emEl.value.trim():'';
+    var telEl=p1.querySelector('#f-tel');var tel=telEl?telEl.value.trim():'';
     var hid=p1.querySelector('input[name=tranche]');var tranche=hid&&hid.value?hid.value:(window.__patrimTranche||'');
     if(!nom){if(texts[0])texts[0].focus();return;}
     if(!EMAIL_RE.test(email)){if(emEl)emEl.focus();return;}
+    if(tel.replace(/[^0-9]/g,'').length<6){if(telEl)telEl.focus();return;}
     sub.disabled=true;var lbl=sub.textContent;sub.textContent='Envoi…';
-    patrimSend({nom:nom,email:email,pays:pays,tranche:tranche,objectif:window.__patrimObjectif||''},
+    patrimSend({nom:nom,email:email,tel:tel,pays:pays,tranche:tranche,objectif:window.__patrimObjectif||''},
       function(){patrimConversion();show(2);steps.forEach(function(s){s.classList.add('on');});},
       function(){sub.disabled=false;sub.textContent=lbl;alert('Un souci est survenu lors de l\'envoi. Réessayez, ou écrivez-nous à contact@iaba.tech.');});
   });
@@ -89,12 +91,14 @@ function patrimConversion(){try{if(window.gtag)gtag('event','conversion',{send_t
     var nom=texts[0]?texts[0].value.trim():'';
     var pays=texts[1]?texts[1].value.trim():'';
     var emEl=form.querySelector('input[type=email]');var email=emEl?emEl.value.trim():'';
+    var telEl=form.querySelector('input[type=tel]');var tel=telEl?telEl.value.trim():'';
     var hid=form.querySelector('input[name=tranche]');var tranche=hid&&hid.value?hid.value:(window.__patrimTranche||'');
     var btn=form.querySelector('button[type=submit]');
     if(!nom){if(texts[0])texts[0].focus();return;}
     if(!EMAIL_RE.test(email)){if(emEl)emEl.focus();return;}
+    if(tel.replace(/[^0-9]/g,'').length<6){if(telEl)telEl.focus();return;}
     var lbl=btn?btn.textContent:'';if(btn){btn.disabled=true;btn.textContent='Envoi…';}
-    patrimSend({nom:nom,email:email,pays:pays,tranche:tranche,objectif:window.__patrimObjectif||''},
+    patrimSend({nom:nom,email:email,tel:tel,pays:pays,tranche:tranche,objectif:window.__patrimObjectif||''},
       function(){patrimConversion();var hd=modal.querySelector('.mhead');if(hd)hd.style.display='none';form.style.display='none';if(done)done.hidden=false;},
       function(){if(btn){btn.disabled=false;btn.textContent=lbl;}alert('Un souci est survenu lors de l\'envoi. Réessayez, ou écrivez-nous à contact@iaba.tech.');});
   });
